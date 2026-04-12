@@ -93,14 +93,15 @@ public class AuthService {
                     new UsernamePasswordAuthenticationToken(request.email(), request.password())
             );
 
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            String accessToken = jwtService.generateAccessToken(userDetails);
-            String refreshToken = jwtService.generateRefreshToken(userDetails);
+            AppUser user = (AppUser) authentication.getPrincipal();
+            String accessToken = jwtService.generateAccessToken(user);
+            String refreshToken = jwtService.generateRefreshToken(user);
 
             return new LoginResponse(
                     "Bearer",
                     accessToken,
                     refreshToken,
+                    user.getRole().name(),
                     "local"
             );
         } catch (AuthenticationException ex) {
