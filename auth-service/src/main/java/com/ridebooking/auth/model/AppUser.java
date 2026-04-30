@@ -56,6 +56,14 @@ public class AppUser implements UserDetails {
     @Column(nullable = false)
     private Instant updatedAt;
 
+    public AppUser(String fullName, String email, String phoneNumber, String passwordHash, AccountRole role) {
+        this.fullName = fullName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.passwordHash = passwordHash;
+        this.role = role;
+    }
+
     @PrePersist
     void onCreate() {
         Instant now = Instant.now();
