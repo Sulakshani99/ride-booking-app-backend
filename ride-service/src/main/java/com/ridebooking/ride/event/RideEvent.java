@@ -10,6 +10,7 @@ public record RideEvent(
         Long rideId,
         Long passengerId,
         Long driverId,
+        PaymentMethod paymentMethod,
         RideStatus status,
         BigDecimal fare,
         Instant occurredAt

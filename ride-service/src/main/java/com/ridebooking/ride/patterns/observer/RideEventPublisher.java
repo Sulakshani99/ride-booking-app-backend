@@ -23,6 +23,7 @@ public class RideEventPublisher {
                 ride.getId(),
                 ride.getPassengerId(),
                 ride.getDriverId(),
+            ride.getPaymentMethod(),
                 ride.getStatus(),
                 ride.getFinalFare() != null ? ride.getFinalFare() : ride.getEstimatedFare(),
                 Instant.now()
