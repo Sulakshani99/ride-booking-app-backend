@@ -39,6 +39,22 @@ public class JwtClaimsExtractor {
         throw new RideServiceException("JWT does not contain a userId claim");
     }
 
+    public String extractRole(String authorizationHeader)
+    {
+        String token = extractBearerToken(authorizationHeader);
+        Claims claims = Jwts.parser()
+                .verifyWith(signInKey)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+
+        String role = claims.get("role", String.class);
+        if (role != null && !role.isBlank()) {
+            return role;
+        }
+        throw new RideServiceException("JWT does not contain a role claim");
+    }
+
     private String extractBearerToken(String authorizationHeader) 
     {
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) 

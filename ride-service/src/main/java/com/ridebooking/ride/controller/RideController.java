@@ -6,6 +6,7 @@ import com.ridebooking.ride.dto.request.FareEstimateRequest;
 import com.ridebooking.ride.dto.request.UpdateRideStatusRequest;
 import com.ridebooking.ride.dto.response.FareEstimateResponse;
 import com.ridebooking.ride.dto.response.RideResponse;
+import com.ridebooking.ride.exception.RideServiceException;
 import com.ridebooking.ride.security.JwtClaimsExtractor;
 import com.ridebooking.ride.service.interfaces.IRideService;
 import jakarta.validation.Valid;
@@ -56,14 +57,21 @@ public class RideController {
 
     @GetMapping("/history")
     public ResponseEntity<List<RideResponse>> getHistory(
-            @RequestParam String role,
             @RequestHeader("Authorization") String authorizationHeader
     ) {
         Long userId = jwtClaimsExtractor.extractUserId(authorizationHeader);
-        List<RideResponse> rides = "driver".equalsIgnoreCase(role)
-                ? rideService.getDriverRideHistory(userId)
-                : rideService.getPassengerRideHistory(userId);
-        return ResponseEntity.ok(rides);
+        String role = jwtClaimsExtractor.extractRole(authorizationHeader);
+        return ResponseEntity.ok(resolveHistoryForRole(role, userId));
+    }
+
+    private List<RideResponse> resolveHistoryForRole(String role, Long userId) {
+        return switch (role.toUpperCase()) {
+            case "DRIVER" -> rideService.getDriverRideHistory(userId);
+            case "USER" -> rideService.getPassengerRideHistory(userId);
+            default -> throw new RideServiceException(
+                    "Ride history is available only for passenger and driver accounts, not role: " + role
+            );
+        };
     }
 
     @PatchMapping("/{rideId}/assign-driver")
