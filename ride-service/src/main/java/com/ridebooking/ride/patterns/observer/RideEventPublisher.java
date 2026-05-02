@@ -1,7 +1,8 @@
 package com.ridebooking.ride.patterns.observer;
 
 import com.ridebooking.ride.entity.Ride;
-import com.ridebooking.ride.event.RideEvent;
+import com.ridebooking.shared.dto.RideEvent;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
@@ -10,10 +11,13 @@ import java.time.Instant;
 @Component
 public class RideEventPublisher {
 
-    private static final String TOPIC = "ride-events";
+    @Value("${ride.events.topic}")
+    private String topic;
+    
     private final KafkaTemplate<String, RideEvent> kafkaTemplate;
 
-    public RideEventPublisher(KafkaTemplate<String, RideEvent> kafkaTemplate) {
+    public RideEventPublisher(KafkaTemplate<String, RideEvent> kafkaTemplate) 
+    {
         this.kafkaTemplate = kafkaTemplate;
     }
 
@@ -23,11 +27,11 @@ public class RideEventPublisher {
                 ride.getId(),
                 ride.getPassengerId(),
                 ride.getDriverId(),
-            ride.getPaymentMethod(),
+                ride.getPaymentMethod(),
                 ride.getStatus(),
                 ride.getFinalFare() != null ? ride.getFinalFare() : ride.getEstimatedFare(),
                 Instant.now()
         );
-        kafkaTemplate.send(TOPIC, ride.getId().toString(), event);
+        kafkaTemplate.send(topic, ride.getId().toString(), event);
     }
 }

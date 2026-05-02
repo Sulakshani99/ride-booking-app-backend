@@ -1,6 +1,6 @@
 package com.ridebooking.payment.dto.response;
 
-import com.ridebooking.payment.enums.PaymentMethod;
+import com.ridebooking.shared.enums.PaymentMethod;
 import com.ridebooking.payment.enums.PaymentStatus;
 
 import java.math.BigDecimal;

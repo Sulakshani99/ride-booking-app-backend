@@ -1,4 +1,4 @@
-package com.ridebooking.ride.enums;
+package com.ridebooking.shared.enums;
 
 public enum PaymentMethod {
     CASH,

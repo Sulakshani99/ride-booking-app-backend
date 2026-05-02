@@ -1,8 +1,8 @@
 package com.ridebooking.ride.entity;
 
-import com.ridebooking.ride.enums.PaymentMethod;
+import com.ridebooking.shared.enums.PaymentMethod;
 import com.ridebooking.ride.enums.PricingType;
-import com.ridebooking.ride.enums.RideStatus;
+import com.ridebooking.shared.enums.RideStatus;
 import com.ridebooking.ride.enums.VehicleType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,15 +17,16 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.math.BigDecimal;
 import java.time.Instant;
+import com.ridebooking.shared.enums.PaymentMethod;
+import com.ridebooking.shared.enums.RideStatus;
 
-@Entity
-@Table(name = "rides")
 @Getter
 @Setter
 @NoArgsConstructor
+@Entity
+@Table(name = "rides")
 public class Ride {
 
     @Id

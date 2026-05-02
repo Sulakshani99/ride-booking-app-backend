@@ -1,6 +1,6 @@
 package com.ridebooking.ride.dto.request;
 
-import com.ridebooking.ride.enums.PaymentMethod;
+import com.ridebooking.shared.enums.PaymentMethod;
 import com.ridebooking.ride.enums.VehicleType;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;

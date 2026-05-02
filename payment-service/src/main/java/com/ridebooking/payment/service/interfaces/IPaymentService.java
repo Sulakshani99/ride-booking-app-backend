@@ -2,7 +2,7 @@ package com.ridebooking.payment.service.interfaces;
 
 import com.ridebooking.payment.dto.request.UpdatePaymentStatusRequest;
 import com.ridebooking.payment.dto.response.PaymentResponse;
-import com.ridebooking.payment.event.RideEvent;
+import com.ridebooking.shared.dto.RideEvent;
 
 import java.util.List;
 

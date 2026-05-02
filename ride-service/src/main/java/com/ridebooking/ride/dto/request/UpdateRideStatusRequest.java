@@ -1,6 +1,6 @@
 package com.ridebooking.ride.dto.request;
 
-import com.ridebooking.ride.enums.RideStatus;
+import com.ridebooking.shared.enums.RideStatus;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;

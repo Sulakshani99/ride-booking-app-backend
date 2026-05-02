@@ -1,7 +1,7 @@
 package com.ridebooking.ride.repository;
 
 import com.ridebooking.ride.entity.Ride;
-import com.ridebooking.ride.enums.RideStatus;
+import com.ridebooking.shared.enums.RideStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

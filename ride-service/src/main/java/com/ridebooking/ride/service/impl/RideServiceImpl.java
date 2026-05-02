@@ -8,7 +8,7 @@ import com.ridebooking.ride.dto.response.FareEstimateResponse;
 import com.ridebooking.ride.dto.response.RideResponse;
 import com.ridebooking.ride.entity.Ride;
 import com.ridebooking.ride.enums.PricingType;
-import com.ridebooking.ride.enums.RideStatus;
+import com.ridebooking.shared.enums.RideStatus;
 import com.ridebooking.ride.enums.VehicleType;
 import com.ridebooking.ride.exception.InvalidRideStatusTransitionException;
 import com.ridebooking.ride.exception.RideNotFoundException;

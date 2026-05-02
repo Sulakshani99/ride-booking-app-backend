@@ -1,8 +1,8 @@
 package com.ridebooking.ride.dto.response;
 
-import com.ridebooking.ride.enums.PaymentMethod;
+import com.ridebooking.shared.enums.PaymentMethod;
 import com.ridebooking.ride.enums.PricingType;
-import com.ridebooking.ride.enums.RideStatus;
+import com.ridebooking.shared.enums.RideStatus;
 import com.ridebooking.ride.enums.VehicleType;
 import lombok.AllArgsConstructor;
 import lombok.Data;

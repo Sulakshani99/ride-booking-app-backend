@@ -1,6 +1,6 @@
 package com.ridebooking.payment.entity;
 
-import com.ridebooking.payment.enums.PaymentMethod;
+import com.ridebooking.shared.enums.PaymentMethod;
 import com.ridebooking.payment.enums.PaymentStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
