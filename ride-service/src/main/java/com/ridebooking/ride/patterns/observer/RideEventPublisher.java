@@ -11,7 +11,7 @@ import java.time.Instant;
 @Component
 public class RideEventPublisher {
 
-    @Value("${ride.events.topic}")
+    @Value("${spring.kafka.template.default-topic}")
     private String topic;
     
     private final KafkaTemplate<String, RideEvent> kafkaTemplate;
@@ -21,12 +21,15 @@ public class RideEventPublisher {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void publish(String eventType, Ride ride) {
+    public void publish(String eventType, Ride ride) 
+    {
         RideEvent event = new RideEvent(
                 eventType,
                 ride.getId(),
                 ride.getPassengerId(),
+                ride.getPassengerEmail(),
                 ride.getDriverId(),
+                ride.getDriverEmail(),
                 ride.getPaymentMethod(),
                 ride.getStatus(),
                 ride.getFinalFare() != null ? ride.getFinalFare() : ride.getEstimatedFare(),

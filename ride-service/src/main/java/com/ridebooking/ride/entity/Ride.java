@@ -36,8 +36,14 @@ public class Ride {
     @Column(nullable = false)
     private Long passengerId;
 
+    @Column(nullable = false, length = 255)
+    private String passengerEmail;
+
     @Column
     private Long driverId;
+
+    @Column(length = 255)
+    private String driverEmail;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
@@ -98,11 +104,12 @@ public class Ride {
     private Instant cancelledAt;
 
     // Simple constructor for ride creation
-    public Ride(Long passengerId, VehicleType vehicleType, PaymentMethod paymentMethod,
+    public Ride(Long passengerId, String passengerEmail, VehicleType vehicleType, PaymentMethod paymentMethod,
                 PricingType pricingType, BigDecimal pickupLatitude, BigDecimal pickupLongitude,
                 BigDecimal dropLatitude, BigDecimal dropLongitude, BigDecimal estimatedDistanceKm,
                 BigDecimal estimatedFare, String notes, RideStatus status) {
         this.passengerId = passengerId;
+        this.passengerEmail = passengerEmail;
         this.vehicleType = vehicleType;
         this.paymentMethod = paymentMethod;
         this.pricingType = pricingType;

@@ -47,7 +47,8 @@ public class RideController {
             @Valid @RequestBody BookRideRequest request
     ) {
         Long passengerId = jwtClaimsExtractor.extractUserId(authorizationHeader);
-        return ResponseEntity.status(HttpStatus.CREATED).body(rideService.bookRide(passengerId, request));
+        String passengerEmail = jwtClaimsExtractor.extractEmail(authorizationHeader);
+        return ResponseEntity.status(HttpStatus.CREATED).body(rideService.bookRide(passengerId, passengerEmail, request));
     }
 
     @GetMapping("/{rideId}")

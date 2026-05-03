@@ -14,8 +14,12 @@ public class RideEventListener {
         this.paymentService = paymentService;
     }
 
-    @KafkaListener(topics = "ride-events", groupId = "payment-service")
-    public void onRideEvent(RideEvent event) {
+    @KafkaListener(
+        topics = "${spring.kafka.template.default-topic}",
+        groupId = "${spring.kafka.consumer.group-id}"
+    )
+    public void onRideEvent(RideEvent event) 
+    {
         paymentService.handleRideEvent(event);
     }
 }

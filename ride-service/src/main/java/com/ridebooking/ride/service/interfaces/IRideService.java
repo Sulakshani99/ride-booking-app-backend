@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface IRideService {
 
-    RideResponse bookRide(Long passengerId, BookRideRequest request);
+    RideResponse bookRide(Long passengerId, String passengerEmail, BookRideRequest request);
 
     FareEstimateResponse estimateFare(FareEstimateRequest request);
 

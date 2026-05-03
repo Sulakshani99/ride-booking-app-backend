@@ -54,7 +54,7 @@ public class RideServiceImpl implements IRideService {
 
     @Override
     @Transactional
-    public RideResponse bookRide(Long passengerId, BookRideRequest request) 
+    public RideResponse bookRide(Long passengerId, String passengerEmail, BookRideRequest request) 
     {
         ensurePassengerHasNoActiveRide(passengerId);
 
@@ -69,16 +69,17 @@ public class RideServiceImpl implements IRideService {
 
         Ride ride = new Ride(
                 passengerId,
-            request.getVehicleType(),
-            request.getPaymentMethod(),
+                passengerEmail,
+                request.getVehicleType(),
+                request.getPaymentMethod(),
                 PricingType.NORMAL,
-            request.getPickupLatitude(),
-            request.getPickupLongitude(),
-            request.getDropLatitude(),
-            request.getDropLongitude(),
+                request.getPickupLatitude(),
+                request.getPickupLongitude(),
+                request.getDropLatitude(),
+                request.getDropLongitude(),
                 distanceKm,
                 estimatedFare,
-            request.getNotes(),
+                request.getNotes(),
                 RideStatus.REQUESTED
         );
 
@@ -132,6 +133,7 @@ public class RideServiceImpl implements IRideService {
         ensureDriverHasNoActiveRide(request.getDriverId());
 
         ride.setDriverId(request.getDriverId());
+        ride.setDriverEmail(request.getDriverEmail());
         ride.setAssignedAt(Instant.now());
         ride.setStatus(RideStatus.DRIVER_ASSIGNED);
         Ride savedRide = rideRepository.save(ride);

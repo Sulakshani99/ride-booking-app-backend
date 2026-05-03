@@ -55,6 +55,22 @@ public class JwtClaimsExtractor {
         throw new RideServiceException("JWT does not contain a role claim");
     }
 
+    public String extractEmail(String authorizationHeader)
+    {
+        String token = extractBearerToken(authorizationHeader);
+        Claims claims = Jwts.parser()
+                .verifyWith(signInKey)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+
+        String email = claims.getSubject();
+        if (email != null && !email.isBlank()) {
+            return email;
+        }
+        throw new RideServiceException("JWT does not contain an email subject");
+    }
+
     private String extractBearerToken(String authorizationHeader) 
     {
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) 

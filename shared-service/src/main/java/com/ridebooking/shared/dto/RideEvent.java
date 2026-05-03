@@ -5,14 +5,13 @@ import com.ridebooking.shared.enums.RideStatus;
 import java.math.BigDecimal;
 import java.time.Instant;
 
-/**
- * Shared RideEvent DTO for Kafka messaging across ride-booking services.
- */
 public record RideEvent(
         String eventType,
         Long rideId,
         Long passengerId,
+        String passengerEmail,
         Long driverId,
+        String driverEmail,
         PaymentMethod paymentMethod,
         RideStatus status,
         BigDecimal fare,
