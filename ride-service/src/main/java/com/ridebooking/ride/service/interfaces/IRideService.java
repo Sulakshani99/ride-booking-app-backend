@@ -21,6 +21,8 @@ public interface IRideService {
 
     List<RideResponse> getDriverRideHistory(Long driverId);
 
+    List<RideResponse> getAvailableRideRequests();
+
     RideResponse assignDriver(Long rideId, AssignDriverRequest request);
 
     RideResponse updateRideStatus(Long rideId, UpdateRideStatusRequest request);

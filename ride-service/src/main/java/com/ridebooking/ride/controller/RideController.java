@@ -9,6 +9,7 @@ import com.ridebooking.ride.dto.response.RideResponse;
 import com.ridebooking.ride.exception.RideServiceException;
 import com.ridebooking.ride.security.JwtClaimsExtractor;
 import com.ridebooking.ride.service.interfaces.IRideService;
+import com.ridebooking.shared.enums.RideStatus;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,6 +64,18 @@ public class RideController {
         Long userId = jwtClaimsExtractor.extractUserId(authorizationHeader);
         String role = jwtClaimsExtractor.extractRole(authorizationHeader);
         return ResponseEntity.ok(resolveHistoryForRole(role, userId));
+    }
+
+    @GetMapping("/available")
+    public ResponseEntity<List<RideResponse>> getAvailableRides(
+            @RequestHeader("Authorization") String authorizationHeader
+    ) {
+        String role = jwtClaimsExtractor.extractRole(authorizationHeader);
+        if (!"DRIVER".equalsIgnoreCase(role)) {
+            throw new RideServiceException("Available ride requests are visible only to drivers");
+        }
+
+        return ResponseEntity.ok(rideService.getAvailableRideRequests());
     }
 
     private List<RideResponse> resolveHistoryForRole(String role, Long userId) {

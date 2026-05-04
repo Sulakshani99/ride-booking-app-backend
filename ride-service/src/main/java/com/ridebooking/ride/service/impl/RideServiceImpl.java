@@ -122,6 +122,14 @@ public class RideServiceImpl implements IRideService {
     }
 
     @Override
+    public List<RideResponse> getAvailableRideRequests() {
+        List<Ride> requestedRides = rideRepository.findByStatusOrderByCreatedAtDesc(RideStatus.REQUESTED);
+        return requestedRides.stream()
+                .map(rideMapper::mapToResponse)
+                .toList();
+    }
+
+    @Override
     @Transactional
     public RideResponse assignDriver(Long rideId, AssignDriverRequest request) 
     {
